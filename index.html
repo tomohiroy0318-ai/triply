@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI、地図、ホテル予約、実在のモデルコースをひとつにした旅行計画アプリ" />
+    <title>TRIPLY — 旅を、完成させよう。</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="TRIPLY ホーム"><span class="brand-mark">✦</span>TRIPLY</a>
+      <div class="trip-title"><span class="eyebrow">YOUR TRIP</span><strong>夏の札幌・小樽 2日間</strong></div>
+      <div class="header-actions"><button class="icon-button" aria-label="旅を共有">↗</button><button class="save-button" id="saveTrip">♡ 保存する</button></div>
+    </header>
+
+    <main id="top" class="app-shell">
+      <aside class="planner panel">
+        <div class="panel-heading"><span class="section-kicker">AI TRIP PLANNER</span><h1>旅を、完成させよう。</h1><p>好みを伝えるだけで、地図と予約につながる旅程に。</p></div>
+        <form id="plannerForm">
+          <label>行き先<input id="destination" value="札幌・小樽" /></label>
+          <div class="form-grid"><label>日数<select id="days"><option value="2">2日間</option><option value="3">3日間</option><option value="4">4日間</option></select></label><label>予算<select id="budget"><option value="20000">〜2万円</option><option value="40000" selected>〜4万円</option><option value="70000">〜7万円</option></select></label></div>
+          <label>旅のスタイル</label>
+          <div class="chips" id="styleChips"><button type="button" class="chip active" data-style="グルメ">🍣 グルメ</button><button type="button" class="chip" data-style="ゆったり">☕ ゆったり</button><button type="button" class="chip" data-style="自然">⛰ 自然</button><button type="button" class="chip" data-style="街歩き">📷 街歩き</button></div>
+          <label>希望・こだわり<textarea id="request" rows="3" placeholder="例：夜景も見たい、海鮮を食べたい">海鮮とビール、札幌らしい夜景を楽しみたい</textarea></label>
+          <button class="generate-button" type="submit"><span>✦</span> AIで旅程を調整する</button>
+        </form>
+        <div class="ai-note" id="aiNote"><span>✦</span><p><strong>AIからの提案</strong><br />藻岩山は日没の45分前に着くと、夕景から夜景まで楽しめます。</p></div>
+      </aside>
+
+      <section class="itinerary panel">
+        <div class="itinerary-header"><div><span class="section-kicker">ITINERARY</span><h2>あなたの旅程</h2></div><span class="status">● 調整済み</span></div>
+        <div id="timeline"></div>
+        <button class="add-stop" id="addStop">＋ 立ち寄り先を追加</button>
+      </section>
+
+      <section class="map-column">
+        <div class="map-toolbar"><span class="map-label">MAP <span>· SAPPORO & OTARU</span></span><button id="recenter">⌖ 全体を見る</button></div>
+        <div id="map" aria-label="札幌・小樽の旅程マップ"></div>
+        <div class="map-card" id="mapCard"><span class="number-badge">1</span><div><strong>新千歳空港</strong><p>旅のスタート地点</p></div></div>
+      </section>
+
+      <aside class="hotel panel">
+        <div class="hotel-heading"><span class="section-kicker">STAY</span><h2>ホテルを予約</h2><p>旅程に合う、便利な立地を提案。</p></div>
+        <div id="hotelList"></div>
+        <a class="compare-link" id="compareHotels" href="https://travel.rakuten.co.jp/" target="_blank" rel="noopener">すべてのホテルを比較する <span>→</span></a>
+        <div class="complete-box"><span>✦</span><div><strong>あと1ステップ</strong><p>ホテルを予約すれば、旅の準備は完了です。</p></div></div>
+      </aside>
+    </main>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="app.js"></script>
+  </body>
+</html>
